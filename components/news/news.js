@@ -37,3 +37,38 @@ newsData'nın her bir elemanını NewsBuilder ile kullanmak için bir döngü ya
 Not 1: İlk 2 adım NewsBuilder içinde yapılmalı.
 Not 2: NewsBuilder fonksiyonunda oluşturduklarınızı return etmeyi unutmayın.
 */
+
+function newsBuilder(newsItem) {
+  const articleDiv = document.createElement("div");
+  articleDiv.classList.add("article");
+  const newsTittle = document.createElement("h2");
+  const newsDate = document.createElement("p");
+  newsDate.classList.add("date");
+  const paragraph1 = document.createElement("p");
+  const paragraph2 = document.createElement("p");
+  const paragraph3 = document.createElement("p");
+  const button = document.createElement("button");
+  articleDiv.append(
+    newsTittle,
+    newsDate,
+    paragraph1,
+    paragraph2,
+    paragraph3,
+    button
+  );
+  button.classList.add("expandButton");
+  button.textContent = "+";
+  button.addEventListener("click", () => articleDiv.classList.toggle("isOpen"));
+
+  newsTittle.textContent = newsItem.baslik;
+  newsDate.textContent = newsItem.tarih;
+  paragraph1.textContent = newsItem.ilkParagraf;
+  paragraph2.textContent = newsItem.ikinciParagraf;
+  paragraph3.textContent = newsItem.ucuncuParagraf;
+
+  return articleDiv;
+}
+
+newsData.forEach((news) => {
+  document.querySelector(".articleList").appendChild(newsBuilder(news));
+});
